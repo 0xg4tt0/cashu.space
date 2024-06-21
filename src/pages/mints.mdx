@@ -11,34 +11,144 @@ Yes.
 
 ## DISCLAIMER
 
-This is provided for educational purposes only. Many of the clients listed in this guide are still in active development and carry substantial risk. The authors advise the reader to be cautious, and first attempts at running a mint should be done on testnet/signet (not on mainnet Bitcoin) so that you can get to an understaning of the process. Do your own research and ask questions in the appropriate Telegram channel. This information is provided as is and without any guarentees that your mint will work upon finishing the guide.
+This is provided for educational purposes only. Many of the clients listed in this guide are still in active development and carry substantial risk. The authors advise the reader to be cautious, and first attempts at running a mint should be done on testnet/signet (not on mainnet Bitcoin) so that you can get to an understaning of the process. Do your own research and ask questions in the appropriate Telegram channel. Cashu is in its early development, you should use the protocol only with small amounts.
 
 
 ## General Observations
 
 For all the mint clients that are at your disposal to install, in the majority of cases the most painless option is to follow the Docker installation process for that client. 
 
-What is Docker?
+**What is Docker?**
+
 Docker provides the ability to package and run an application in a loosely isolated environment called a container. The isolation and security lets you run many containers simultaneously on a given host. Containers are lightweight and contain everything needed to run the application, so you don't need to rely on what's installed on the host. You can share containers while you work, and be sure that everyone you share with gets the same container that works in the same way. Read more here: https://docs.docker.com/guides/docker-overview
 
 
 ## Mint Client Overview 
+ <!-- | :----: | :----: | :----: | :----: | :----: | :----: | :----: | --> 
 
-<insert table> 
-- client name 
-- language
-- docker?
-- last updated (fetch?)
-- latest release (fetch?)
-- github repo link
+| Name | Languages | Platforms | Docker? | Latest release | Code | Guide | 
+| :----: | :----: | :----: | :----: | :----: | :----: | :----: |
+| Nutshell | Python | All platforms | Yes | 0.15.3 | https://github.com/cashubtc/nutshell | Link to Guide | 
+| Moksha | Rust | Platforms | Yes | 0.2.1 | https://github.com/ngutech21/moksha | Link to Guide | 
+| gonuts | Go | All Platforms | No | 0.1.0 | https://github.com/elnosh/gonuts | Link to Guide | 
+| cashu-rs-mint | Rust, Nix | All Platforms | No | :construction: | https://github.com/thesimplekid/cashu-rs-mint | Link to Guide | 
+| nutmix | Go | Platforms | Yes | :construction: | https://github.com/lescuer97/nutmix | Link to Guide | 
+
 
 
 ## Platforms
 
 
-### Linux (Ubuntu/Debian)
+### Linux
+
+To complete any installation of a cashu mint on a Linux you will need the following technical proficiencies:
+- knowledge of Bash / comfortable in a Terminal setting
+- Root access to the machine that will be running the Mint
+- Some knowledge of Lightning (node and channel management)
+
+Covered in this guide are the following mainstream Linux distributions: Ubuntu, Debian, ...
+
+
+----- Nutshell CLIENT ------
+
+***Nutshell***
+Cashu Nutshell is a Chaumian Ecash wallet and mint for Bitcoin Lightning. Cashu Nutshell is the reference implementation in Python.
+
+#### Support channels for this Mint
+https://github.com/cashubtc/nutshell/issues
+
+#### Official Documentation
+https://github.com/cashubtc/nutshell/blob/main/README.md
+
+
+### Installing Nutshell on Ubuntu
 
 ...
+
+#### Libraries & Dependencies
+
+...
+
+#### Stack Requirements
+
+...
+
+### Just the commands
+
+...
+
+#### External Tutorials
+
+...
+
+#### Best Practices 
+
+...
+
+
+
+
+
+
+### Installing Nutshell on Debian
+
+**TBC**
+
+#### Libraries & Dependencies
+
+...
+
+#### Stack Requirements
+
+...
+
+### Just the commands
+
+...
+
+#### External Tutorials
+
+...
+
+#### Best Practices 
+
+...
+
+
+
+
+
+
+### Installing Nutshell on Windows
+
+#### Libraries & Dependencies
+
+...
+
+#### Stack Requirements
+
+...
+
+### Just the commands
+
+...
+
+#### External Tutorials
+
+...
+
+#### Best Practices 
+
+...
+
+
+
+
+
+
+### Installing  Nutshell on Mac OSx
+
+**TBC**
 
 #### Knowledge requirements
 
@@ -56,20 +166,14 @@ Docker provides the ability to package and run an application in a loosely isola
 
 ...
 
-#### Official Documentation
-
-...
-
-#### Support channels for this Mint
-
-...
 
 
 
 
-### Windows
 
-...
+### Installing Nuthshell on Raspberry Pi (ARM)
+
+**TBC**
 
 #### Knowledge requirements
 
@@ -87,20 +191,154 @@ Docker provides the ability to package and run an application in a loosely isola
 
 ...
 
-#### Official Documentation
 
-...
+
+
+----- MOKSHA CLIENT ------
+
+***Moksha***
+moksha is a cashu library, mint and cli-wallet written in Rust.
 
 #### Support channels for this Mint
+https://github.com/ngutech21/moksha/issues
+
+#### Official Documentation
+https://github.com/ngutech21/moksha/blob/master/README.md
+
+
+### Installing Moksha using Docker
+
+#### Docker-compose
+
+docker-compose simplifies the process of running multi-container Docker applications. Here's how you can use it to run the moksha -mint:
+
+1. First, you need to have Docker Compose installed on your machine. If it's not installed, you can download it from the [official Docker website](https://docs.docker.com/compose/install/).
+
+2. Copy the tls.cert and admin.macaroon files from your LND instance into the `./data/mutinynet/` directory.
+
+3. Configure the `LND_GRPC_HOST` environment variable in the `docker-compose.yml` file to point to your LND instance.
+
+4. Run the following command in the same directory as your `docker-compose.yml` file to start the mint and a postgres database:
+
+```bash
+docker-compose up -d app database
+```
+
+#### Libraries & Dependencies
+
+...
+
+#### Stack Requirements
+
+...
+
+### Just the commands
+
+```docker-compose up -d app database```
+
+#### External Tutorials
+
+...
+
+#### Best Practices 
 
 ...
 
 
 
 
-### Mac OSx
+
+
+### Installing Moksha from Source (Ubuntu/Debian)
+
+### Setup rust
+
+```bash
+git clone https://github.com/ngutech21/moksha.git
+cargo install just typos-cli sqlx-cli grcov wasm-pack wasm-opt
+rustup component add llvm-tools-preview
+cd moksha
+```
+
+### Install protobuf for your platform
+
+This is needed for the LND backend.
+
+```bash
+sudo apt install protobuf-compiler
+brew install protobuf
+choco install protoc
+```
+
+### Config
+
+```bash
+mv .env.example .env
+# edit .env file
+vim .env
+```
+
+### Run mint (cashu-server)
+
+To run the mint you need to setup a lightning regtest environment like [Polar](https://lightningpolar.com) and a Lnbits or Lnd instance. In Lnbits create a new wallet and copy the admin key into the .env file and set the url to your Lnbits instance. The mint uses PostgreSQL for storing used proofs and pending invoices. The database URL can be configured in the .env file.
+
+```bash
+install docker and docker-compose
+docker compose up -d
+just db-create
+just run-mint
+```
+
+#### Libraries & Dependencies
 
 ...
+
+#### Stack Requirements
+
+...
+
+#### External Tutorials
+
+...
+
+#### Best Practices 
+
+...
+
+
+
+
+
+### Installing Moksha on Windows
+
+#### Libraries & Dependencies
+
+...
+
+#### Stack Requirements
+
+...
+
+### Just the commands
+
+...
+
+#### External Tutorials
+
+...
+
+#### Best Practices 
+
+...
+
+
+
+
+
+
+### Installing Moksha on Mac OSx
+
+**TBC**
 
 #### Knowledge requirements
 
@@ -118,19 +356,13 @@ Docker provides the ability to package and run an application in a loosely isola
 
 ...
 
-#### Official Documentation
-
-...
-
-#### Support channels for this Mint
-
-...
 
 
 
-### Raspberry Pi (ARM)
 
-...
+### Installing Moksha on Raspberry Pi (ARM)
+
+**TBC**
 
 #### Knowledge requirements
 
@@ -148,18 +380,152 @@ Docker provides the ability to package and run an application in a loosely isola
 
 ...
 
-#### Official Documentation
 
-...
+
+----- NEWMINT CLIENT ------
+
+***NEWMINT***
+Description ipsume lorem bla bla
 
 #### Support channels for this Mint
+ 
+#### Official Documentation
+ 
+
+### Installing NEWMINT on Ubuntu
 
 ...
+
+#### Libraries & Dependencies
+
+...
+
+#### Stack Requirements
+
+...
+
+### Just the commands
+
+...
+
+#### External Tutorials
+
+...
+
+#### Best Practices 
+
+...
+
+
+
+### Installing NEWMINT on Debian
+
+**TBC**
+
+#### Libraries & Dependencies
+
+...
+
+#### Stack Requirements
+
+...
+
+### Just the commands
+
+...
+
+#### External Tutorials
+
+...
+
+#### Best Practices 
+
+...
+
+
+
+
+
+
+### Installing NEWMINT on Windows
+
+#### Libraries & Dependencies
+
+...
+
+#### Stack Requirements
+
+...
+
+### Just the commands
+
+...
+
+#### External Tutorials
+
+...
+
+#### Best Practices 
+
+...
+
+
+
+
+
+
+### Installing  NEWMINT on Mac OSx
+
+**TBC**
+
+#### Knowledge requirements
+
+...
+
+#### Stack Requirements
+
+...
+
+#### External Tutorials
+
+...
+
+#### Best Practices 
+
+...
+
+
+
+
+
+
+### Installing NEWMINT on Raspberry Pi (ARM)
+
+**TBC**
+
+#### Knowledge requirements
+
+...
+
+#### Stack Requirements
+
+...
+
+#### External Tutorials
+
+...
+
+#### Best Practices 
+
+...
+
+
 
 
 
 
 ## Frequently Asked Questions about Mints
+
 
 #### Can mints see my IP address?
 
@@ -172,7 +538,7 @@ You can, however, use the tokens from one mint and swap them over Lightning for 
 
 #### How do I send (swap) tokens from one mint to another?
 
-In your wallet UI, use the Multimint Swap functionality, which operates via Lightning invoices under the hood.
+In your wallet client UI, use the Multimint Swap functionality, which operates via Lightning invoices under the hood.
 
 - Cashu.me: On the Settings tab.
 - Nutstash: On the Mint tab.
@@ -180,18 +546,14 @@ In your wallet UI, use the Multimint Swap functionality, which operates via Ligh
 
 Note: You must have 2 mints in order to send/swap between mints.
 
-#### Is there a list of mints? Which mint should I run?
+#### Is there a list of mints I can already connect to (mainnet)?
 
-Cashu is in its early development, use with small amounts. There are default mints in each wallet:
+You can use Bitcoin Mints to list, review, and find mints: https://bitcoinmints.com/
+
+Listed below are the default mints in some of the Cashu wallet clients:
 - Cashu.me: https://8333.space:3338
-
-- Nutstash: https://legend.lnbits.com/cashu/api/v1/4gr9Xcmz3XEkUNwiBiQGoC
-
-- eNuts: https://legend.lnbits.com/cashu/api/v1/AptDNABNBXv8gpuywhx6NV
-
 - Minibits: https://mint.minibits.cash
-
-You can see a list of some public mints on MINTINDEX - Find a cashu mint.
+- 
 
 #### Can I send and receive tokens to/from the same mint?
 
@@ -199,8 +561,4 @@ Yes, this is a common first test use case. Also, sometimes you might send a toke
 
 #### How can I run my own mint?
 
-There are several ways to run a mint, depending on your needs:
-
-- On legend.lnbits.com by enabling the Cashu extension and creating a new mint.
-- On your own LNbits instance by installing the Cashu extension and creating a new mint.
-- With Cashu Nutshell.
+Read this guide, try it out and contact the developer if you have issues or wish to contribute to the projects.
