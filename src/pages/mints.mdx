@@ -1,5 +1,4 @@
-export const description =
-  'An overview of Cashu compatible Mints and a basic guide to how to run your own Mint'
+<!-- export const description = 'An overview of Cashu compatible Mints and a basic guide to how to run your own Mint' -->
 
 # What is a Cashu Mint?
 
@@ -61,9 +60,93 @@ https://github.com/cashubtc/nutshell/issues
 https://github.com/cashubtc/nutshell/blob/main/README.md
 
 
-### Installing Nutshell on Ubuntu
+### Installing Nutshell on Linux
 
-...
+## Easy Install
+
+The easiest way to use Cashu is to install the package it via pip:
+```bash
+pip install cashu
+```
+
+To update Cashu, use `pip install cashu -U`.
+
+If you have problems running the command above on Ubuntu, run `sudo apt install -y pip pkg-config` and `pip install wheel`. On macOS, you might have to run `pip install wheel` and `brew install pkg-config`.
+
+You can skip the entire next section about Poetry and jump right to [Using Cashu](#using-cashu).
+
+## Manual install: Poetry
+These steps help you install Python via pyenv and Poetry. If you already have Poetry running on your computer, you can skip this step and jump right to [Install Cashu](#poetry-install-cashu).
+
+#### Poetry: Prerequisites
+
+```bash
+# on ubuntu:
+sudo apt install -y build-essential pkg-config libffi-dev libpq-dev zlib1g-dev libssl-dev python3-dev libsqlite3-dev ncurses-dev libbz2-dev libreadline-dev lzma-dev
+
+# install python using pyenv
+curl https://pyenv.run | bash
+
+# !! follow the instructions of pyenv init to setup pyenv !!
+pyenv init
+
+# restart your shell (or source your .rc file), then install python:
+pyenv install 3.10.4
+
+# install poetry
+curl -sSL https://install.python-poetry.org | python3 -
+echo export PATH=\"$HOME/.local/bin:$PATH\" >> ~/.bashrc
+source ~/.bashrc
+```
+#### Poetry: Install Cashu
+```bash
+# install cashu
+git clone https://github.com/cashubtc/nutshell.git cashu
+cd cashu
+git checkout <latest_tag>
+pyenv local 3.10.4
+poetry install
+```
+
+If you would like to use PostgreSQL as the mint database, use the command `poetry install --extras pgsql`.
+
+#### Poetry: Update Cashu
+To update Cashu to the newest version enter
+```bash
+git pull && poetry install
+```
+#### Poetry: Using the Nutshell wallet
+
+Cashu should be now installed. To execute the following commands, activate your virtual Poetry environment via
+
+```bash
+poetry shell
+```
+
+If you don't activate your environment, just prepend `poetry run` to all following commands.
+## Configuration
+```bash
+mv .env.example .env
+# edit .env file
+vim .env
+```
+
+To use the wallet with the [public test mint](#test-instance), you need to change the appropriate entries in the `.env` file.
+
+#### Test instance
+*Warning: this instance is just for demonstration purposes and development only. The satoshis are not real.*
+
+Change the appropriate `.env` file settings to
+```bash
+MINT_URL=https://testnut.cashu.space
+```
+## Running the mint
+Before you can run your own mint, make sure to enable a Lightning backend in `MINT_BACKEND_BOLT11_SAT` and set `MINT_PRIVATE_KEY` in your `.env` file.
+```bash
+poetry run mint
+```
+
+For testing, you can use Nutshell without a Lightning backend by setting `MINT_BACKEND_BOLT11_SAT=FakeWallet` in the `.env` file.
 
 #### Libraries & Dependencies
 
@@ -75,7 +158,9 @@ https://github.com/cashubtc/nutshell/blob/main/README.md
 
 ### Just the commands
 
-...
+```pip install cashu```
+
+```poetry run mint```
 
 #### External Tutorials
 
@@ -84,36 +169,6 @@ https://github.com/cashubtc/nutshell/blob/main/README.md
 #### Best Practices 
 
 ...
-
-
-
-
-
-
-### Installing Nutshell on Debian
-
-**TBC**
-
-#### Libraries & Dependencies
-
-...
-
-#### Stack Requirements
-
-...
-
-### Just the commands
-
-...
-
-#### External Tutorials
-
-...
-
-#### Best Practices 
-
-...
-
 
 
 
@@ -121,26 +176,7 @@ https://github.com/cashubtc/nutshell/blob/main/README.md
 
 ### Installing Nutshell on Windows
 
-#### Libraries & Dependencies
-
-...
-
-#### Stack Requirements
-
-...
-
-### Just the commands
-
-...
-
-#### External Tutorials
-
-...
-
-#### Best Practices 
-
-...
-
+***TBC***
 
 
 
@@ -150,22 +186,6 @@ https://github.com/cashubtc/nutshell/blob/main/README.md
 
 **TBC**
 
-#### Knowledge requirements
-
-...
-
-#### Stack Requirements
-
-...
-
-#### External Tutorials
-
-...
-
-#### Best Practices 
-
-...
-
 
 
 
@@ -174,22 +194,6 @@ https://github.com/cashubtc/nutshell/blob/main/README.md
 ### Installing Nuthshell on Raspberry Pi (ARM)
 
 **TBC**
-
-#### Knowledge requirements
-
-...
-
-#### Stack Requirements
-
-...
-
-#### External Tutorials
-
-...
-
-#### Best Practices 
-
-...
 
 
 
@@ -311,27 +315,7 @@ just run-mint
 
 ### Installing Moksha on Windows
 
-#### Libraries & Dependencies
-
-...
-
-#### Stack Requirements
-
-...
-
-### Just the commands
-
-...
-
-#### External Tutorials
-
-...
-
-#### Best Practices 
-
-...
-
-
+**TBC**
 
 
 
@@ -340,45 +324,11 @@ just run-mint
 
 **TBC**
 
-#### Knowledge requirements
-
-...
-
-#### Stack Requirements
-
-...
-
-#### External Tutorials
-
-...
-
-#### Best Practices 
-
-...
-
-
-
 
 
 ### Installing Moksha on Raspberry Pi (ARM)
 
 **TBC**
-
-#### Knowledge requirements
-
-...
-
-#### Stack Requirements
-
-...
-
-#### External Tutorials
-
-...
-
-#### Best Practices 
-
-...
 
 
 
