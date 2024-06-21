@@ -334,9 +334,64 @@ Cashu wallet and mint implementation in Go.
 #### Official Documentation: https://github.com/elnosh/gonuts/blob/main/README.md
  
 
-### Installing gonuts on Ubuntu
+### Installing gonuts on Linux
 
-...
+With [Go](https://go.dev/doc/install) installed, you can run the following command to install the wallet:
+
+```
+go install github.com/elnosh/gonuts/cmd/nutw@latest
+```
+
+To setup a mint for the wallet, create a `.env` file at ~/.gonuts/wallet/.env and setup your preferred mint.
+
+## Using the wallet
+
+### Check balance
+
+```
+nutw balance
+```
+
+### Create a Lightning invoice to receive ecash
+
+```
+nutw mint 100
+```
+
+This will get an invoice from the mint which you can then pay and use to mint new ecash.
+
+```
+invoice: lnbc100n1pja0w9pdqqx...
+```
+
+### Redeem the ecash after paying the invoice
+
+```
+nutw mint --invoice lnbc100n1pja0w9pdqqx...
+```
+
+### Send tokens
+
+```
+nutw send 21
+```
+
+This will generate a Cashu token that looks like this:
+
+```
+cashuAeyJ0b2tlbiI6W3sibW...
+```
+
+This is the ecash that you can then send to anyone.
+
+### Run mint
+
+- `cd cmd/mint`
+- you'll need to setup a lightning regtest environment with something like [Polar](https://lightningpolar.com/) and fill in the values in the `.env` file
+
+- `go build -v -o mint mint.go`
+
+- `./mint`
 
 #### Libraries & Dependencies
 
@@ -348,7 +403,13 @@ Cashu wallet and mint implementation in Go.
 
 ### Just the commands
 
-...
+```go install github.com/elnosh/gonuts/cmd/nutw@latest```
+
+```cd cmd/mint```
+
+```go build -v -o mint mint.go```
+
+```./mint```
 
 #### External Tutorials
 
