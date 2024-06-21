@@ -1,28 +1,206 @@
 export const description =
-  'An overview of Cashu clients and wallets'
+  'An overview of Cashu compatible Mints and a basic guide to how to run your own Mint'
 
-# What is a Cashu wallet?
+# What is a Cashu Mint?
 
-...
+Mints are Lightning node runners that have decided to let you use their Lightning infrastructure to offer you a service. They will act as a custodian for your satoshis on the Lightning network, while they issue ecash to you, the user. You can think of it as in free banking, where the bank issues their own bank notes that is backed by gold.
 
-## Are Cashu wallets compatible?
+## Are Cashu Mints interoperable with each other (client diversity)?
 
 Yes.
 
+## DISCLAIMER
+
+This is provided for educational purposes only. Many of the clients listed in this guide are still in active development and carry substantial risk. The authors advise the reader to be cautious, and first attempts at running a mint should be done on testnet/signet (not on mainnet Bitcoin) so that you can get to an understaning of the process. Do your own research and ask questions in the appropriate Telegram channel. This information is provided as is and without any guarentees that your mint will work upon finishing the guide.
+
+
+## General Observations
+
+For all the mint clients that are at your disposal to install, in the majority of cases the most painless option is to follow the Docker installation process for that client. 
+
+What is Docker?
+Docker provides the ability to package and run an application in a loosely isolated environment called a container. The isolation and security lets you run many containers simultaneously on a given host. Containers are lightweight and contain everything needed to run the application, so you don't need to rely on what's installed on the host. You can share containers while you work, and be sure that everyone you share with gets the same container that works in the same way. Read more here: https://docs.docker.com/guides/docker-overview
+
+
+## Mint Client Overview 
+
+<insert table> 
+- client name 
+- language
+- docker?
+- last updated (fetch?)
+- latest release (fetch?)
+- github repo link
+
+
 ## Platforms
 
-### Web
+
+### Linux (Ubuntu/Debian)
 
 ...
 
-### iOS
+#### Knowledge requirements
 
 ...
 
-### Android
+#### Stack Requirements
 
 ...
 
-### Desktop
+#### External Tutorials
 
 ...
+
+#### Best Practices 
+
+...
+
+#### Official Documentation
+
+...
+
+#### Support channels for this Mint
+
+...
+
+
+
+
+### Windows
+
+...
+
+#### Knowledge requirements
+
+...
+
+#### Stack Requirements
+
+...
+
+#### External Tutorials
+
+...
+
+#### Best Practices 
+
+...
+
+#### Official Documentation
+
+...
+
+#### Support channels for this Mint
+
+...
+
+
+
+
+### Mac OSx
+
+...
+
+#### Knowledge requirements
+
+...
+
+#### Stack Requirements
+
+...
+
+#### External Tutorials
+
+...
+
+#### Best Practices 
+
+...
+
+#### Official Documentation
+
+...
+
+#### Support channels for this Mint
+
+...
+
+
+
+### Raspberry Pi (ARM)
+
+...
+
+#### Knowledge requirements
+
+...
+
+#### Stack Requirements
+
+...
+
+#### External Tutorials
+
+...
+
+#### Best Practices 
+
+...
+
+#### Official Documentation
+
+...
+
+#### Support channels for this Mint
+
+...
+
+
+
+
+## Frequently Asked Questions about Mints
+
+#### Can mints see my IP address?
+
+Yes. Cashu doesn't protect against network-level heuristics per default. Users should take precautions to protect themselves against leaking network metadata by using privacy tools such as Tor.
+
+#### Why can't I receive tokens from one mint into another mint?
+
+Each mint has their own tokens. Therefore, you cannot receive tokens from one mint into another mint.
+You can, however, use the tokens from one mint and swap them over Lightning for tokens from another mint. To transfer tokens from one mint to another, use the Multimint Swap functionality.
+
+#### How do I send (swap) tokens from one mint to another?
+
+In your wallet UI, use the Multimint Swap functionality, which operates via Lightning invoices under the hood.
+
+- Cashu.me: On the Settings tab.
+- Nutstash: On the Mint tab.
+- eNuts: Go to Options->Mint Management->Funds->Multimint Swap
+
+Note: You must have 2 mints in order to send/swap between mints.
+
+#### Is there a list of mints? Which mint should I run?
+
+Cashu is in its early development, use with small amounts. There are default mints in each wallet:
+- Cashu.me: https://8333.space:3338
+
+- Nutstash: https://legend.lnbits.com/cashu/api/v1/4gr9Xcmz3XEkUNwiBiQGoC
+
+- eNuts: https://legend.lnbits.com/cashu/api/v1/AptDNABNBXv8gpuywhx6NV
+
+- Minibits: https://mint.minibits.cash
+
+You can see a list of some public mints on MINTINDEX - Find a cashu mint.
+
+#### Can I send and receive tokens to/from the same mint?
+
+Yes, this is a common first test use case. Also, sometimes you might send a token that is not received or redeemed, and you might want to copy the token and receive it back to yourself.
+
+#### How can I run my own mint?
+
+There are several ways to run a mint, depending on your needs:
+
+- On legend.lnbits.com by enabling the Cashu extension and creating a new mint.
+- On your own LNbits instance by installing the Cashu extension and creating a new mint.
+- With Cashu Nutshell.
